@@ -1,20 +1,16 @@
 'use strict';
 
 /**
- * Sanitizes a `blocked-uri` value.
+ * List of allowed globally unique identifiers.
  *
- * @param  {String}    value      The raw `blocked-uri` value.
- * @param  {Object}    payload    The full CSP report object.
- * @return {String}               The sanitized `blocked-uri` value.
+ * @return {String}    Sanitized globally unique identifier.
  */
-function sanitize(value, payload) {
-  var result = '';
-
-  if (true === isGloballyUniqueIdentifier(value)) {
-    result = sanitizeGloballyUniqueIdentifier(value);
-  }
-
-  return result;
+function getGloballyUniqueIdentifiers() {
+  return [
+    'data',
+    'filesystem',
+    'blob'
+  ];
 }
 
 /**
@@ -57,16 +53,20 @@ function sanitizeGloballyUniqueIdentifier(value) {
 }
 
 /**
- * List of allowed globally unique identifiers.
+ * Sanitizes a `blocked-uri` value.
  *
- * @return {String}    Sanitized globally unique identifier.
+ * @param  {String}    value      The raw `blocked-uri` value.
+ * @param  {Object}    payload    The full CSP report object.
+ * @return {String}               The sanitized `blocked-uri` value.
  */
-function getGloballyUniqueIdentifiers() {
-  return [
-    'data',
-    'filesystem',
-    'blob'
-  ];
+function sanitize(value, payload) {
+  var result = '';
+
+  if (true === isGloballyUniqueIdentifier(value)) {
+    result = sanitizeGloballyUniqueIdentifier(value);
+  }
+
+  return result;
 }
 
 module.exports = {
