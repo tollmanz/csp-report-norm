@@ -17,5 +17,6 @@
   "esnext": true,
   "sub": true,
   "browser": true,
-  "node": true
+  "node": true,
+  "mocha": true
 }
