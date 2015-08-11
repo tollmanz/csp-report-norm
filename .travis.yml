@@ -7,3 +7,5 @@ node_js:
   - "iojs"
   - "iojs-v1.8"
   - "iojs-v2.5"
+script:
+  - npm test-travis
