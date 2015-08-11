@@ -1,0 +1,27 @@
+{
+  "name": "csp-report-norm",
+  "version": "0.0.1",
+  "description": "Normalize Content Security Policy report payloads",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tollmanz/csp-report-norm.git"
+  },
+  "keywords": [
+    "content",
+    "security",
+    "policy",
+    "sanitization",
+    "csp",
+    "https"
+  ],
+  "author": "Zack Tollman <tollmanz@gmail.com> (https://www.tollmanz.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tollmanz/csp-report-norm/issues"
+  },
+  "homepage": "https://github.com/tollmanz/csp-report-norm#readme"
+}
