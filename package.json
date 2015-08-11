@@ -4,7 +4,8 @@
   "description": "Normalize Content Security Policy report payloads",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha",
+    "lint": "jshint"
   },
   "repository": {
     "type": "git",
