@@ -1,7 +1,7 @@
 'use strict';
 
 var should = require('chai').should(); // jshint ignore:line
-var sanitize = require('../handlers/blocked-uri').sanitize;
+var sanitize = require('../lib/sanitize/blockedURI').sanitize;
 
 describe('handlers/blocked-uri', function() {
   it('converts data URIs to data', function() {
