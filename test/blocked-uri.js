@@ -35,4 +35,8 @@ describe('handlers/blocked-uri', function() {
   it('returns the full blocked URI when it matches the protected resource\'s origin and the resource has a path', function() {
     sanitize('http://www.example.com/hello-world', 'http://www.example.com/testing').should.equal('http://www.example.com/hello-world');
   });
+
+  it('returns the blocked URI origin when it matches the protected resource\'s origin, but not protocol', function() {
+    sanitize('http://www.example.com/hello-world', 'https://www.example.com/testing').should.equal('http://www.example.com/');
+  });
 });

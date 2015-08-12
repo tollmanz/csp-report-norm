@@ -76,7 +76,7 @@ function sanitize(blockedURI, protectedResource) {
 
     // If the protected resource's origin is the same as that of the blocked URI
     // the whole URI can be returned; otherwise, the origin only is returned.
-    if (blockedURIPieces.host === protectedResourcePieces.host) {
+    if (blockedURIPieces.host === protectedResourcePieces.host && blockedURIPieces.protocol === protectedResourcePieces.protocol) {
       result = blockedURI;
     } else {
       result = blockedURIPieces.protocol + '//' + blockedURIPieces.host + '/';
