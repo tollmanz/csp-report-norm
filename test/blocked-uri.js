@@ -20,11 +20,19 @@ describe('handlers/blocked-uri', function() {
     sanitize('test', {}).should.equal('');
   });
 
-  it('returns the origin of a blocked URI when it does not match the protected resource\'s origin ', function() {
+  it('returns the origin of a blocked URI when it does not match the protected resource\'s origin', function() {
     sanitize('http://www.example.com/hello-world', 'http://www.another-example.com').should.equal('http://www.example.com/');
   });
 
-  it('returns the full blocked URI when it matches the protected resource\'s origin ', function() {
-    sanitize('http://www.example.com/hello-world', 'http://www.another-example.com').should.equal('http://www.example.com/');
+  it('returns the origin of a blocked URI when it does not match the protected resource\'s origin and the resource has a path', function() {
+    sanitize('http://www.example.com/hello-world', 'http://www.another-example.com/yolo').should.equal('http://www.example.com/');
+  });
+
+  it('returns the full blocked URI when it matches the protected resource\'s origin', function() {
+    sanitize('http://www.example.com/hello-world', 'http://www.example.com').should.equal('http://www.example.com/hello-world');
+  });
+
+  it('returns the full blocked URI when it matches the protected resource\'s origin and the resource has a path', function() {
+    sanitize('http://www.example.com/hello-world', 'http://www.example.com/testing').should.equal('http://www.example.com/hello-world');
   });
 });
