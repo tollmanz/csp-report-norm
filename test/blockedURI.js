@@ -3,7 +3,7 @@
 var should = require('chai').should(); // jshint ignore:line
 var sanitize = require('../lib/sanitize/blockedURI').sanitize;
 
-describe('handlers/blocked-uri', function() {
+describe('sanitize/blocked-uri', function() {
   it('converts data URIs to data', function() {
     sanitize('data:xxxxxxxx').should.equal('data');
   });
