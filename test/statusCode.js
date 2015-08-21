@@ -21,6 +21,8 @@ suite('sanitize', function() {
     test('status code is zero when not a valid status code', function() {
       assert.equal(sanitize(''), 0);
       assert.equal(sanitize('two-hundred'), 0);
+      assert.equal(sanitize(-1), 0);
+      assert.equal(sanitize('-1'), 0);
       assert.equal(sanitize({}), 0);
     });
 
