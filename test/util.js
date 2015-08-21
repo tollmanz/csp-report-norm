@@ -1,63 +1,64 @@
 'use strict';
 
-var should = require('chai').should(); // jshint ignore:line
-var expect = require('chai').expect; // jshint ignore:line
+var assert = require('chai').assert;
 var util = require('../lib/util');
 
-describe('util\'s globally unique identifier functions', function() {
-  it('globally unique identifiers should be an array', function() {
-    expect(util.getGloballyUniqueIdentifiers()).to.be.a('array');
-  });
+suite('util', function() {
+  suite('globally unique identifier functions', function() {
+    test('globally unique identifiers should be an array', function() {
+      assert.isArray(util.getGloballyUniqueIdentifiers());
+    });
 
-  it('globally unique identifiers should return specific values', function() {
-    expect(util.getGloballyUniqueIdentifiers()).to.deep.equal(['data', 'filesystem', 'blob']);
-  });
+    test('globally unique identifiers should return specific values', function() {
+      assert.deepEqual(util.getGloballyUniqueIdentifiers(), ['data', 'filesystem', 'blob']);
+    });
 
-  it('data URI is a globally unique identifier', function() {
-    expect(util.isGloballyUniqueIdentifier('data:xxxxxx')).to.equal(true);
-  });
+    test('data URI is a globally unique identifier', function() {
+      assert.isTrue(util.isGloballyUniqueIdentifier('data:xxxxxx'));
+    });
 
-  it('data globally unique identifier is a globally unique identifier', function() {
-    expect(util.isGloballyUniqueIdentifier('data')).to.equal(true);
-  });
+    test('data globally unique identifier is a globally unique identifier', function() {
+      assert.isTrue(util.isGloballyUniqueIdentifier('data'));
+    });
 
-  it('blob URI is a globally unique identifier', function() {
-    expect(util.isGloballyUniqueIdentifier('blob:xxxxxx')).to.equal(true);
-  });
+    test('blob URI is a globally unique identifier', function() {
+      assert.isTrue(util.isGloballyUniqueIdentifier('blob:xxxxxx'));
+    });
 
-  it('blob globally unique identifier is a globally unique identifier', function() {
-    expect(util.isGloballyUniqueIdentifier('blob')).to.equal(true);
-  });
+    test('blob globally unique identifier is a globally unique identifier', function() {
+      assert.isTrue(util.isGloballyUniqueIdentifier('blob'));
+    });
 
-  it('filesystem URI is a globally unique identifier', function() {
-    expect(util.isGloballyUniqueIdentifier('filesystem:xxxxxx')).to.equal(true);
-  });
+    test('filesystem URI is a globally unique identifier', function() {
+      assert.isTrue(util.isGloballyUniqueIdentifier('filesystem:xxxxxx'));
+    });
 
-  it('filesystem globally unique identifier is a globally unique identifier', function() {
-    expect(util.isGloballyUniqueIdentifier('filesystem')).to.equal(true);
-  });
+    test('filesystem globally unique identifier is a globally unique identifier', function() {
+      assert.isTrue(util.isGloballyUniqueIdentifier('filesystem'));
+    });
 
-  it('data URI sanitizes to data', function() {
-    expect(util.sanitizeGloballyUniqueIdentifier('data:xxxxxx')).to.equal('data');
-  });
+    test('data URI sanitizes to data', function() {
+      assert.equal(util.sanitizeGloballyUniqueIdentifier('data:xxxxxx'), 'data');
+    });
 
-  it('data sanitizes to data', function() {
-    expect(util.sanitizeGloballyUniqueIdentifier('data')).to.equal('data');
-  });
+    test('data sanitizes to data', function() {
+      assert.equal(util.sanitizeGloballyUniqueIdentifier('data'), 'data');
+    });
 
-  it('blob URI sanitizes to blob', function() {
-    expect(util.sanitizeGloballyUniqueIdentifier('blob:xxxxxx')).to.equal('blob');
-  });
+    test('blob URI sanitizes to blob', function() {
+      assert.equal(util.sanitizeGloballyUniqueIdentifier('blob:xxxxxx'), 'blob');
+    });
 
-  it('blob sanitizes to blob', function() {
-    expect(util.sanitizeGloballyUniqueIdentifier('blob')).to.equal('blob');
-  });
+    test('blob sanitizes to blob', function() {
+      assert.equal(util.sanitizeGloballyUniqueIdentifier('blob'), 'blob');
+    });
 
-  it('filesystem URI sanitizes to filesystem', function() {
-    expect(util.sanitizeGloballyUniqueIdentifier('filesystem:xxxxxx')).to.equal('filesystem');
-  });
+    test('filesystem URI sanitizes to filesystem', function() {
+      assert.equal(util.sanitizeGloballyUniqueIdentifier('filesystem:xxxxxx'), 'filesystem');
+    });
 
-  it('filesystem sanitizes to filesystem', function() {
-    expect(util.sanitizeGloballyUniqueIdentifier('filesystem')).to.equal('filesystem');
+    test('filesystem sanitizes to filesystem', function() {
+      assert.equal(util.sanitizeGloballyUniqueIdentifier('filesystem'), 'filesystem');
+    });
   });
 });
