@@ -2,6 +2,7 @@
 
 var assert = require('chai').assert;
 var sanitize = require('../lib/sanitize/documentURI').sanitize;
+var getDocumentURI = require('../lib/sanitize/documentURI').getDocumentURI;
 
 suite('sanitize', function() {
   suite('document-uri', function() {
@@ -33,14 +34,17 @@ suite('sanitize', function() {
       assert.equal(sanitize(ipWithoutProtocol), ipWithoutProtocol);
     });
 
-    test('document-url is used when document-uri is not available and document-url is and a valid URL is returned when passed', function() {
-      var documentURI = '';
-      var documentURL = 'http://example.com';
-      assert.equal(sanitize(documentURI, documentURL), documentURL);
+    test('getDocumentURI is a function', function() {
+      assert.isFunction(getDocumentURI);
     });
 
-    test('document-url is used when document-uri is not available and document-url is and an empty string is returned when passed an invalid URL', function() {
-      assert.equal(sanitize('', 'testing'), '');
+    test('document-url is used when document-uri is not available and document-url is and a valid URL is returned when passed', function() {
+      var url = 'http://example.com';
+      var payload = {
+        'document-url': url
+      };
+
+      assert.equal(getDocumentURI(payload), url);
     });
   });
 });
