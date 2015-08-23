@@ -1,8 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var sanitize = require('../lib/sanitize/documentURI').sanitize;
-var getDocumentURI = require('../lib/sanitize/documentURI').getDocumentURI;
+var sanitize = require('../../lib/sanitize/documentURI').sanitize;
 
 suite('sanitize', function() {
   suite('document-uri', function() {
@@ -32,19 +31,6 @@ suite('sanitize', function() {
     test('IP address alone returns IP address alone', function() {
       var ipWithoutProtocol = 'http://127.0.0.1';
       assert.equal(sanitize(ipWithoutProtocol), ipWithoutProtocol);
-    });
-
-    test('getDocumentURI is a function', function() {
-      assert.isFunction(getDocumentURI);
-    });
-
-    test('document-url is used when document-uri is not available and document-url is and a valid URL is returned when passed', function() {
-      var url = 'http://example.com';
-      var payload = {
-        'document-url': url
-      };
-
-      assert.equal(getDocumentURI(payload), url);
     });
   });
 });

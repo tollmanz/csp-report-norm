@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var sanitize = require('../lib/sanitize/blockedURI').sanitize;
+var sanitize = require('../../lib/sanitize/blockedURI').sanitize;
 
 suite('sanitize', function() {
   suite('blocked-uri', function() {
