@@ -3,8 +3,8 @@
 var assert = require('chai').assert;
 var getDocumentURI = require('../../lib/extract/documentURI').getDocumentURI;
 
-suite('extract', function() {
-  suite('document-uri', function() {
+suite(__dirname.split('/').pop(), function() {
+  suite(__filename.split('/').pop().replace('.js', ''), function() {
     test('getDocumentURI is a function', function() {
       assert.isFunction(getDocumentURI);
     });

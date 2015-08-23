@@ -3,7 +3,7 @@
 var assert = require('chai').assert;
 var util = require('../lib/util');
 
-suite('util', function() {
+suite(__filename.split('/').pop().replace('.js', ''), function() {
   suite('globally unique identifier functions', function() {
     test('globally unique identifiers should be an array', function() {
       assert.isArray(util.getGloballyUniqueIdentifiers());
