@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var sanitize = require('../lib/sanitize/statusCode').sanitize;
+var sanitize = require('../../lib/sanitize/statusCode').sanitize;
 
 suite('sanitize', function() {
   suite('status-code', function() {
