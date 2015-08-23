@@ -20,6 +20,14 @@ suite('extract', function() {
       assert.equal(getDocumentURI(payload), url);
     });
 
+    test('empty string when csp-report is set and the document-uri is not set', function() {
+      var payload = {
+        'csp-report': ''
+      };
+
+      assert.equal(getDocumentURI(payload), '');
+    });
+
     test('document-url is used when document-uri is not available', function() {
       var url = 'http://example.com';
       var payload = {
