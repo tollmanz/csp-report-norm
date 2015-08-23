@@ -9,6 +9,10 @@ suite('sanitize', function() {
       assert.isFunction(sanitize);
     });
 
+    test('sanitize is a function', function() {
+      assert.isFunction(sanitize);
+    });
+
     test('valid URL returns URL', function() {
       var url = 'http://example.com';
       assert.equal(sanitize(url), url);

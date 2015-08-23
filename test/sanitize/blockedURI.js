@@ -5,6 +5,10 @@ var sanitize = require('../../lib/sanitize/blockedURI').sanitize;
 
 suite('sanitize', function() {
   suite('blocked-uri', function() {
+    test('sanitize is a function', function() {
+      assert.isFunction(sanitize);
+    });
+
     test('convert data URIs to data', function() {
       assert.equal(sanitize('data:xxxxxxxx'), 'data');
     });
