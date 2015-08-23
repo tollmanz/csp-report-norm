@@ -3,8 +3,8 @@
 var assert = require('chai').assert;
 var sanitize = require('../../lib/sanitize/statusCode').sanitize;
 
-suite('sanitize', function() {
-  suite('status-code', function() {
+suite(__dirname.split('/').pop(), function() {
+  suite(__filename.split('/').pop().replace('.js', ''), function() {
     test('sanitize is a function', function() {
       assert.isFunction(sanitize);
     });

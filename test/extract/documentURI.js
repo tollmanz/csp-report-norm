@@ -3,8 +3,8 @@
 var assert = require('chai').assert;
 var getDocumentURI = require('../../lib/extract/documentURI').getDocumentURI;
 
-suite('extract', function() {
-  suite('document-uri', function() {
+suite(__dirname.split('/').pop(), function() {
+  suite(__filename.split('/').pop().replace('.js', ''), function() {
     test('getDocumentURI is a function', function() {
       assert.isFunction(getDocumentURI);
     });
@@ -18,6 +18,14 @@ suite('extract', function() {
       };
 
       assert.equal(getDocumentURI(payload), url);
+    });
+
+    test('empty string when csp-report is set and the document-uri is not set', function() {
+      var payload = {
+        'csp-report': ''
+      };
+
+      assert.equal(getDocumentURI(payload), '');
     });
 
     test('document-url is used when document-uri is not available', function() {
