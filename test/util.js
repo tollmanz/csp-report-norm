@@ -91,5 +91,39 @@ suite(__filename.split('/').pop().replace('.js', ''), function() {
     test('invalid effective directive is false', function() {
       assert.isFalse(util.isValidEffectiveDirective('blah'));
     });
+
+    test('getEffectiveDirectiveFromEffectiveDirective is a function', function() {
+      assert.isFunction(util.getEffectiveDirectiveFromEffectiveDirective);
+    });
+
+    test('return effective-directive when getting it and one exists', function() {
+      var effectiveDirective = 'img-src';
+      var payload = {
+        'csp-report': {
+          'effective-directive': effectiveDirective
+        }
+      };
+
+      assert.equal(util.getEffectiveDirectiveFromEffectiveDirective(payload), effectiveDirective);
+    });
+
+    test('return empty string when getting effectiveDirective and one does not exist', function() {
+      var payload = {
+        'csp-report': {}
+      };
+
+      assert.equal(util.getEffectiveDirectiveFromEffectiveDirective(payload), '');
+      assert.equal(util.getEffectiveDirectiveFromEffectiveDirective({}), '');
+    });
+
+    test('return empty string when getting effectiveDirective and one does not exist, but is not valid', function() {
+      var payload = {
+        'csp-report': {
+          'effective-directive': 'blah'
+        }
+      };
+
+      assert.equal(util.getEffectiveDirectiveFromEffectiveDirective(payload), '');
+    });
   });
 });
