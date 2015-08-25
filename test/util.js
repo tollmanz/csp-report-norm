@@ -61,4 +61,35 @@ suite(__filename.split('/').pop().replace('.js', ''), function() {
       assert.equal(util.sanitizeGloballyUniqueIdentifier('filesystem'), 'filesystem');
     });
   });
+
+  suite('directive functions', function() {
+    test('ensure getDirectives returns the right directives', function() {
+      assert.deepEqual(util.getDirectives(), [
+          'base-uri',
+          'child-src',
+          'connect-src',
+          'font-src',
+          'form-action',
+          'frame-ancestors',
+          'frame-src',
+          'img-src',
+          'media-src',
+          'object-src',
+          'plugin-types',
+          'report-uri',
+          'script-src',
+          'sandbox',
+          'style-src'
+        ]
+      );
+    });
+
+    test('valid effective directive is true', function() {
+      assert.isTrue(util.isValidEffectiveDirective('img-src'));
+    });
+
+    test('invalid effective directive is false', function() {
+      assert.isFalse(util.isValidEffectiveDirective('blah'));
+    });
+  });
 });
