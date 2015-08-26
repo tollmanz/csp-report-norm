@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var extract = require('../../lib/extract/effectiveDirective').extract;
+var extract = require('../../lib/extract/violatedDirective').extract;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
@@ -10,17 +10,17 @@ suite(__dirname.split('/').pop(), function() {
     });
 
     test('extract finds directive when it exists', function() {
-      var effectiveDirective = 'img-src';
+      var effectiveDirective = 'img-src \'self\'';
       var report = {
         'csp-report': {
-          'effective-directive': effectiveDirective
+          'violated-directive': effectiveDirective
         }
       };
 
       assert.equal(extract(report), effectiveDirective);
     });
 
-    test('extract returns empty string when `effective-directive` is not set', function() {
+    test('extract returns empty string when `violated-directive` is not set', function() {
       var report = {
         'csp-report': {}
       };
