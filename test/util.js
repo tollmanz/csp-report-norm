@@ -69,23 +69,22 @@ suite(__filename.split('/').pop().replace('.js', ''), function() {
 
     test('ensure getDirectives returns the right directives', function() {
       assert.deepEqual(util.getDirectives(), [
-          'base-uri',
-          'child-src',
-          'connect-src',
-          'font-src',
-          'form-action',
-          'frame-ancestors',
-          'frame-src',
-          'img-src',
-          'media-src',
-          'object-src',
-          'plugin-types',
-          'report-uri',
-          'script-src',
-          'sandbox',
-          'style-src'
-        ]
-      );
+        'base-uri',
+        'child-src',
+        'connect-src',
+        'font-src',
+        'form-action',
+        'frame-ancestors',
+        'frame-src',
+        'img-src',
+        'media-src',
+        'object-src',
+        'plugin-types',
+        'report-uri',
+        'script-src',
+        'sandbox',
+        'style-src'
+      ]);
     });
   });
 });
