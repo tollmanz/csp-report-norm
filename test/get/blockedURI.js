@@ -4,7 +4,7 @@ var assert = require('chai').assert;
 var get = require('../../lib/get/blockedURI').get;
 
 suite(__dirname.split('/').pop(), function() {
-  suite.only(__filename.split('/').pop().replace('.js', ''), function() {
+  suite(__filename.split('/').pop().replace('.js', ''), function() {
     test('get is a function', function() {
       assert.isFunction(get);
     });
