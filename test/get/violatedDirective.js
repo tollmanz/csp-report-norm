@@ -9,7 +9,7 @@ suite(__dirname.split('/').pop(), function() {
       assert.isFunction(get);
     });
 
-    test.skip('returns violated directive correctly when passed violated directive', function() {
+    test('returns violated directive correctly when passed violated directive', function() {
       var violatedDirective = 'style-src http://example.com';
       var report = {
         'csp-report': {
@@ -20,7 +20,7 @@ suite(__dirname.split('/').pop(), function() {
       assert.equal(get(report), violatedDirective);
     });
 
-    test.skip('returns empty string when directive is not proper', function() {
+    test('returns empty string when directive is not proper', function() {
       var violatedDirective = 'blah http://example.com';
       var report = {
         'csp-report': {
