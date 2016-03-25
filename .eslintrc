@@ -21,5 +21,9 @@
         "node": true,
         "mocha": true
     },
+    "globals": {
+        "suite": true,
+        "test": true
+    },
     "extends": "eslint:recommended"
 }
