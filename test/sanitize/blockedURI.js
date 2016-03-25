@@ -26,11 +26,11 @@ suite(__dirname.split('/').pop(), function() {
     });
 
     test('return the origin of a blocked URI when it does not match the protected resource\'s origin', function() {
-      assert.equal(sanitize('http://www.example.com/hello-world', 'http://www.another-example.com'), 'http://www.example.com/');
+      assert.equal(sanitize('http://www.example.com/hello-world', 'http://www.another-example.com'), 'http://www.example.com');
     });
 
     test('return the origin of a blocked URI when it does not match the protected resource\'s origin and the resource has a path', function() {
-      assert.equal(sanitize('http://www.example.com/hello-world', 'http://www.another-example.com/yolo'), 'http://www.example.com/');
+      assert.equal(sanitize('http://www.example.com/hello-world', 'http://www.another-example.com/yolo'), 'http://www.example.com');
     });
 
     test('return the full blocked URI when it matches the protected resource\'s origin', function() {
@@ -42,7 +42,7 @@ suite(__dirname.split('/').pop(), function() {
     });
 
     test('return the blocked URI origin when it matches the protected resource\'s origin, but not protocol', function() {
-      assert.equal(sanitize('http://www.example.com/hello-world', 'https://www.example.com/testing'), 'http://www.example.com/');
+      assert.equal(sanitize('http://www.example.com/hello-world', 'https://www.example.com/testing'), 'http://www.example.com');
     });
   });
 });
