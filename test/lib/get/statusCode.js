@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var get = require('../../lib/get/violatedDirective').get;
+var get = require('../../../lib/get/statusCode').get;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
@@ -9,22 +9,22 @@ suite(__dirname.split('/').pop(), function() {
       assert.isFunction(get);
     });
 
-    test('returns violated directive correctly when passed violated directive', function() {
-      var violatedDirective = 'style-src http://example.com';
+    test('returns statusCode correctly when passed statusCode', function() {
+      var statusCode = 200;
       var report = {
         'csp-report': {
-          'violated-directive': violatedDirective
+          'status-code': statusCode
         }
       };
 
-      assert.equal(get(report), violatedDirective);
+      assert.equal(get(report), statusCode);
     });
 
     test('returns empty string when directive is not proper', function() {
-      var violatedDirective = 'blah http://example.com';
+      var statusCode = 'blah http://example.com';
       var report = {
         'csp-report': {
-          'violated-directive': violatedDirective
+          'status-code': statusCode
         }
       };
 

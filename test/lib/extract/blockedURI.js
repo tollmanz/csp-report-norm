@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var extract = require('../../lib/extract/documentURI').extract;
+var extract = require('../../../lib/extract/blockedURI').extract;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
@@ -9,18 +9,18 @@ suite(__dirname.split('/').pop(), function() {
       assert.isFunction(extract);
     });
 
-    test('document-uri is used when available', function() {
+    test('blocked-uri is used when available', function() {
       var url = 'http://example.com';
       var payload = {
         'csp-report': {
-          'document-uri': url
+          'blocked-uri': url
         }
       };
 
       assert.equal(extract(payload), url);
     });
 
-    test('empty string when csp-report is set and the document-uri is not set', function() {
+    test('empty string when csp-report is set and the blocked-uri is not set', function() {
       var payload = {
         'csp-report': ''
       };

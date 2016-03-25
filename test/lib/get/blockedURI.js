@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var get = require('../../lib/get/blockedURI').get;
+var get = require('../../../lib/get/blockedURI').get;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {

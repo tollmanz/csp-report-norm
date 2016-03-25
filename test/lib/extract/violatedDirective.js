@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var extract = require('../../lib/extract/statusCode').extract;
+var extract = require('../../../lib/extract/violatedDirective').extract;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
@@ -9,29 +9,18 @@ suite(__dirname.split('/').pop(), function() {
       assert.isFunction(extract);
     });
 
-    test('extract finds statusCode when it exists', function() {
-      var statusCode = 200;
+    test('extract finds directive when it exists', function() {
+      var effectiveDirective = 'img-src \'self\'';
       var report = {
         'csp-report': {
-          'status-code': statusCode
+          'violated-directive': effectiveDirective
         }
       };
 
-      assert.equal(extract(report), statusCode);
+      assert.equal(extract(report), effectiveDirective);
     });
 
-    test('extract finds statusCode when it exists and is an empty string', function() {
-      var statusCode = '';
-      var report = {
-        'csp-report': {
-          'status-code': statusCode
-        }
-      };
-
-      assert.equal(extract(report), statusCode);
-    });
-
-    test('extract returns empty string when `statusCode` is not set', function() {
+    test('extract returns empty string when `violated-directive` is not set', function() {
       var report = {
         'csp-report': {}
       };

@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var extract = require('../../lib/extract/violatedDirective').extract;
+var extract = require('../../../lib/extract/referrer').extract;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
@@ -9,18 +9,29 @@ suite(__dirname.split('/').pop(), function() {
       assert.isFunction(extract);
     });
 
-    test('extract finds directive when it exists', function() {
-      var effectiveDirective = 'img-src \'self\'';
+    test('extract finds referrer when it exists', function() {
+      var referrer = 'http://google.com';
       var report = {
         'csp-report': {
-          'violated-directive': effectiveDirective
+          'referrer': referrer
         }
       };
 
-      assert.equal(extract(report), effectiveDirective);
+      assert.equal(extract(report), referrer);
     });
 
-    test('extract returns empty string when `violated-directive` is not set', function() {
+    test('extract finds referrer when it exists and is an empty string', function() {
+      var referrer = '';
+      var report = {
+        'csp-report': {
+          'referrer': referrer
+        }
+      };
+
+      assert.equal(extract(report), referrer);
+    });
+
+    test('extract returns empty string when `referrer` is not set', function() {
       var report = {
         'csp-report': {}
       };

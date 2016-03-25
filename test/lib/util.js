@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var util = require('../lib/util');
+var util = require('../../lib/util');
 
 suite(__filename.split('/').pop().replace('.js', ''), function() {
   suite('globally unique identifier functions', function() {

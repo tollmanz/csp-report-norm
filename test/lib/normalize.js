@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var normalize = require('../lib/normalize').normalize;
+var normalize = require('../../lib/normalize').normalize;
 
 suite(__filename.split('/').pop().replace('.js', ''), function() {
   test('does not alter values for a valid report', function() {

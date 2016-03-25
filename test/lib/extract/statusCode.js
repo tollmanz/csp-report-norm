@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var extract = require('../../lib/extract/referrer').extract;
+var extract = require('../../../lib/extract/statusCode').extract;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
@@ -9,29 +9,29 @@ suite(__dirname.split('/').pop(), function() {
       assert.isFunction(extract);
     });
 
-    test('extract finds referrer when it exists', function() {
-      var referrer = 'http://google.com';
+    test('extract finds statusCode when it exists', function() {
+      var statusCode = 200;
       var report = {
         'csp-report': {
-          'referrer': referrer
+          'status-code': statusCode
         }
       };
 
-      assert.equal(extract(report), referrer);
+      assert.equal(extract(report), statusCode);
     });
 
-    test('extract finds referrer when it exists and is an empty string', function() {
-      var referrer = '';
+    test('extract finds statusCode when it exists and is an empty string', function() {
+      var statusCode = '';
       var report = {
         'csp-report': {
-          'referrer': referrer
+          'status-code': statusCode
         }
       };
 
-      assert.equal(extract(report), referrer);
+      assert.equal(extract(report), statusCode);
     });
 
-    test('extract returns empty string when `referrer` is not set', function() {
+    test('extract returns empty string when `statusCode` is not set', function() {
       var report = {
         'csp-report': {}
       };

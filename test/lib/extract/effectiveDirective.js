@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var extract = require('../../lib/extract/effectiveDirective').extract;
+var extract = require('../../../lib/extract/effectiveDirective').extract;
 
 suite(__dirname.split('/').pop(), function() {
   suite(__filename.split('/').pop().replace('.js', ''), function() {
