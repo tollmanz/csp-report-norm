@@ -1,6 +1,6 @@
 {
   "name": "csp-report-norm",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Normalize Content Security Policy report payloads",
   "main": "index.js",
   "scripts": {
