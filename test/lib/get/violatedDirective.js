@@ -30,5 +30,14 @@ suite(__dirname.split('/').pop(), function() {
 
       assert.equal(get(report), '');
     });
+
+    test('returns empty directive when not namespaced by csp-report', function() {
+      var violatedDirective = 'style-src http://example.com';
+      var report = {
+        'violated-directive': violatedDirective
+      };
+
+      assert.equal(get(report), violatedDirective);
+    });
   });
 });

@@ -77,4 +77,27 @@ suite(__filename.split('/').pop().replace('.js', ''), function () {
 
     assert.deepEqual(normalize(payload, headers), expected);
   });
+
+  test('correctly normalizes a Webkit style report', function () {
+    var payload = {
+      'document-url': 'http://example.com/csp?os=OS%20X&device=&browser_version=23.0&browser=chrome&os_version=Lion',
+      'violated-directive': 'default-src https://example.com/'
+    };
+    var headers = {
+      'referer': 'http://example.com'
+    };
+    var expected = {
+      'csp-report': {
+        'document-uri': 'http://example.com/csp?os=OS%20X&device=&browser_version=23.0&browser=chrome&os_version=Lion',
+        'referrer': '',
+        'violated-directive': 'default-src https://example.com/',
+        'effective-directive': 'default-src',
+        'original-policy': '',
+        'blocked-uri': '',
+        'status-code': 0
+      }
+    };
+
+    assert.deepEqual(normalize(payload, headers), expected);
+  });
 });
