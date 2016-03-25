@@ -72,6 +72,7 @@ suite(__filename.split('/').pop().replace('.js', ''), function() {
         'base-uri',
         'child-src',
         'connect-src',
+        'default-src',
         'font-src',
         'form-action',
         'frame-ancestors',
@@ -85,6 +86,84 @@ suite(__filename.split('/').pop().replace('.js', ''), function() {
         'sandbox',
         'style-src'
       ]);
+    });
+
+    test('isEffectiveDirective is a function', function() {
+      assert.isFunction(util.isEffectiveDirective);
+    });
+
+    test('returns true when directive is valid', function() {
+      assert.isTrue(util.isEffectiveDirective('base-uri'));
+      assert.isTrue(util.isEffectiveDirective('child-src'));
+      assert.isTrue(util.isEffectiveDirective('connect-src'));
+      assert.isTrue(util.isEffectiveDirective('default-src'));
+      assert.isTrue(util.isEffectiveDirective('font-src'));
+      assert.isTrue(util.isEffectiveDirective('form-action'));
+      assert.isTrue(util.isEffectiveDirective('frame-ancestors'));
+      assert.isTrue(util.isEffectiveDirective('frame-src'));
+      assert.isTrue(util.isEffectiveDirective('img-src'));
+      assert.isTrue(util.isEffectiveDirective('media-src'));
+      assert.isTrue(util.isEffectiveDirective('object-src'));
+      assert.isTrue(util.isEffectiveDirective('plugin-types'));
+      assert.isTrue(util.isEffectiveDirective('report-uri'));
+      assert.isTrue(util.isEffectiveDirective('script-src'));
+      assert.isTrue(util.isEffectiveDirective('sandbox'));
+      assert.isTrue(util.isEffectiveDirective('style-src'));
+    });
+
+    test('returns false when directive is not-valid', function() {
+      assert.isFalse(util.isEffectiveDirective(''));
+      assert.isFalse(util.isEffectiveDirective('blah'));
+      assert.isFalse(util.isEffectiveDirective('img-src-blah'));
+      assert.isFalse(util.isEffectiveDirective('blah-img-src'));
+    });
+
+    test('parseDirectiveString is a function', function() {
+      assert.isFunction(util.parseDirectiveString);
+    });
+
+    test('ensure directive is correctly parsed when string has one directive', function() {
+      var directiveString = 'default-src http://example.com';
+      var expected = [
+        {
+          'directive':'default-src',
+          'value': 'http://example.com'
+        }
+      ];
+
+      assert.deepEqual(util.parseDirectiveString(directiveString), expected);
+    });
+
+    test('ensure directives are correctly parsed when multiple directives in a string', function() {
+      var directiveString = 'default-src http://example.com; img-src http://test.com data:';
+      var expected = [
+        {
+          'directive':'default-src',
+          'value': 'http://example.com'
+        },
+        {
+          'directive': 'img-src',
+          'value': 'http://test.com data:'
+        }
+      ];
+
+      assert.deepEqual(util.parseDirectiveString(directiveString), expected);
+    });
+
+    test('ensure invalid directives are removed from results', function() {
+      var directiveString = 'default-src http://example.com; img-src http://test.com data:; whatever-thing hello';
+      var expected = [
+        {
+          'directive':'default-src',
+          'value': 'http://example.com'
+        },
+        {
+          'directive': 'img-src',
+          'value': 'http://test.com data:'
+        }
+      ];
+
+      assert.deepEqual(util.parseDirectiveString(directiveString), expected);
     });
   });
 });
