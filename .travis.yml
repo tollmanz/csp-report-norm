@@ -21,4 +21,5 @@ node_js:
   - "0.10"
   - "iojs"
 script:
+  - npm run-script lint
   - npm run-script test-travis
