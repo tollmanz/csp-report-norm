@@ -166,4 +166,34 @@ suite(__filename.split('/').pop().replace('.js', ''), function() {
       assert.deepEqual(util.parseDirectiveString(directiveString), expected);
     });
   });
+
+  suite('other functions', function() {
+    suite('isNumeric', function() {
+      test('true when passed numbers', function() {
+        assert.isTrue(util.isNumeric(-1));
+        assert.isTrue(util.isNumeric(0));
+        assert.isTrue(util.isNumeric(1));
+
+        assert.isTrue(util.isNumeric('-1'));
+        assert.isTrue(util.isNumeric('0'));
+        assert.isTrue(util.isNumeric('1'));
+
+        assert.isTrue(util.isNumeric(-1.5));
+        assert.isTrue(util.isNumeric(0.0));
+        assert.isTrue(util.isNumeric(1.0));
+
+        assert.isTrue(util.isNumeric('-1.5'));
+        assert.isTrue(util.isNumeric('0.0'));
+        assert.isTrue(util.isNumeric('1.0'));
+      });
+
+      test('false when passed non-numbers', function() {
+        assert.isFalse(util.isNumeric('a'));
+        assert.isFalse(util.isNumeric({}));
+        assert.isFalse(util.isNumeric([]));
+        assert.isFalse(util.isNumeric(null));
+        assert.isFalse(util.isNumeric(function(){}));
+      });
+    });
+  });
 });
