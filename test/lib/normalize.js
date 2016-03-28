@@ -100,4 +100,100 @@ suite(__filename.split('/').pop().replace('.js', ''), function () {
 
     assert.deepEqual(normalize(payload, headers), expected);
   });
+
+  test('appends additional fields if they are present', function () {
+    var payload = {
+      'csp-report': {
+        'document-uri': 'http://example.com/csp?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'referrer': '',
+        'violated-directive': 'child-src https://example.com/',
+        'effective-directive': 'frame-src',
+        'original-policy': 'default-src https://example.com/; child-src https://example.com/; connect-src https://example.com/; font-src https://example.com/; img-src https://example.com/; media-src https://example.com/; object-src https://example.com/; script-src https://example.com/; style-src https://example.com/; form-action https://example.com/; frame-ancestors \'none\'; plugin-types \'none\'; report-uri http://example.com/csp-report?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'blocked-uri': 'http://google.com',
+        'status-code': 200,
+        'source-file': 'http://example.com/',
+        'column-number': 15,
+        'line-number': 35
+      }
+    };
+    var headers = {
+      'referer': 'http://example.com'
+    };
+
+    assert.deepEqual(normalize(payload, headers), payload);
+  });
+
+  test('truncates source file when present', function () {
+    var payload = {
+      'csp-report': {
+        'document-uri': 'http://example.com/csp?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'referrer': '',
+        'violated-directive': 'child-src https://example.com/',
+        'effective-directive': 'frame-src',
+        'original-policy': 'default-src https://example.com/; child-src https://example.com/; connect-src https://example.com/; font-src https://example.com/; img-src https://example.com/; media-src https://example.com/; object-src https://example.com/; script-src https://example.com/; style-src https://example.com/; form-action https://example.com/; frame-ancestors \'none\'; plugin-types \'none\'; report-uri http://example.com/csp-report?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'blocked-uri': 'http://google.com',
+        'status-code': 200,
+        'source-file': 'http://test.com/test.js',
+        'column-number': 15,
+        'line-number': 35
+      }
+    };
+    var headers = {
+      'referer': 'http://example.com'
+    };
+
+    // Duplicating this to avoid problematic cloning issues
+    var payloadExpected = {
+      'csp-report': {
+        'document-uri': 'http://example.com/csp?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'referrer': '',
+        'violated-directive': 'child-src https://example.com/',
+        'effective-directive': 'frame-src',
+        'original-policy': 'default-src https://example.com/; child-src https://example.com/; connect-src https://example.com/; font-src https://example.com/; img-src https://example.com/; media-src https://example.com/; object-src https://example.com/; script-src https://example.com/; style-src https://example.com/; form-action https://example.com/; frame-ancestors \'none\'; plugin-types \'none\'; report-uri http://example.com/csp-report?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'blocked-uri': 'http://google.com',
+        'status-code': 200,
+        'source-file': 'http://test.com',
+        'column-number': 15,
+        'line-number': 35
+      }
+    };
+
+    assert.deepEqual(normalize(payload, headers), payloadExpected);
+  });
+
+  test('does not show column or line number when invalid value', function () {
+    var payload = {
+      'csp-report': {
+        'document-uri': 'http://example.com/csp?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'referrer': '',
+        'violated-directive': 'child-src https://example.com/',
+        'effective-directive': 'frame-src',
+        'original-policy': 'default-src https://example.com/; child-src https://example.com/; connect-src https://example.com/; font-src https://example.com/; img-src https://example.com/; media-src https://example.com/; object-src https://example.com/; script-src https://example.com/; style-src https://example.com/; form-action https://example.com/; frame-ancestors \'none\'; plugin-types \'none\'; report-uri http://example.com/csp-report?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'blocked-uri': 'http://google.com',
+        'status-code': 200,
+        'source-file': 'http://test.com',
+        'column-number': 'blah',
+        'line-number': 'what'
+      }
+    };
+    var headers = {
+      'referer': 'http://example.com'
+    };
+
+    // Duplicating this to avoid problematic cloning issues
+    var payloadExpected = {
+      'csp-report': {
+        'document-uri': 'http://example.com/csp?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'referrer': '',
+        'violated-directive': 'child-src https://example.com/',
+        'effective-directive': 'frame-src',
+        'original-policy': 'default-src https://example.com/; child-src https://example.com/; connect-src https://example.com/; font-src https://example.com/; img-src https://example.com/; media-src https://example.com/; object-src https://example.com/; script-src https://example.com/; style-src https://example.com/; form-action https://example.com/; frame-ancestors \'none\'; plugin-types \'none\'; report-uri http://example.com/csp-report?os=OS%20X&device=&browser_version=43.0&browser=chrome&os_version=Lion',
+        'blocked-uri': 'http://google.com',
+        'status-code': 200,
+        'source-file': 'http://test.com'
+      }
+    };
+
+    assert.deepEqual(normalize(payload, headers), payloadExpected);
+  });
 });
