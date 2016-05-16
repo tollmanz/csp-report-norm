@@ -68,6 +68,12 @@ suite(__dirname.split('/').pop(), function() {
         assert.equal(isSpecialCase(' about:blank '), true);
         assert.equal(isSpecialCase('about:blank '), true);
         assert.equal(isSpecialCase('    about:blank     '), true);
+
+        assert.equal(isSpecialCase('chromenull://'), true);
+        assert.equal(isSpecialCase(' chromenull://'), true);
+        assert.equal(isSpecialCase(' chromenull:// '), true);
+        assert.equal(isSpecialCase('chromenull:// '), true);
+        assert.equal(isSpecialCase('    chromenull://     '), true);
       });
     });
   });
