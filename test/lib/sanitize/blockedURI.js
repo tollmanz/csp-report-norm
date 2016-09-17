@@ -74,6 +74,7 @@ suite(__dirname.split('/').pop(), function() {
         assert.equal(isSpecialCase(' chromenull:// '), true);
         assert.equal(isSpecialCase('chromenull:// '), true);
         assert.equal(isSpecialCase('    chromenull://     '), true);
+        assert.equal(isSpecialCase('safari-extension://com.evernote.safari.clipper-q79wdw8yh9'), true);
       });
     });
   });
